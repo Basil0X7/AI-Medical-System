@@ -1,17 +1,149 @@
 import React from "react";
-import AdminSidebar from '../components/Admin-sidebar';
-import '../styles/AdminSidebar.css';
-
+import AdminSidebar from "../components/Admin-sidebar";
+import "../styles/AdminSidebar.css";
 
 export default function AdminDashboard() {
-    return (
-        <div className="layout">
-            <AdminSidebar />
-            <div className="content">
-                <h1>Welcome to the Admin Dashboard</h1>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum autem commodi repellendus, explicabo repudiandae rem quos exercitationem, odit ad, maxime ullam labore fugiat porro omnis corrupti placeat facilis esse. Magni ipsa iure a cum maiores vitae? Totam cum deleniti id expedita sint exercitationem architecto illum velit animi impedit! Aperiam blanditiis dolore iure recusandae in ab quod, voluptatem id accusamus facere quos. Explicabo deserunt eius blanditiis similique aperiam natus, repudiandae omnis! Accusamus vero dicta earum doloribus cumque atque inventore hic! Aliquid quo quis alias corporis. Eaque, ullam? Accusamus sapiente quasi modi veritatis quod esse delectus vel cum inventore, rerum reiciendis corrupti, error, sint veniam quos saepe. Necessitatibus cum vel iste minus, qui reprehenderit amet dolorum minima ullam maxime praesentium doloremque obcaecati, enim dicta, sunt laudantium. Itaque illo odit veritatis quos quia natus corrupti fuga cum quam optio saepe, vitae explicabo deleniti inventore quasi nisi aut quisquam nobis unde quaerat. Pariatur sunt veniam, quam est quaerat ducimus voluptate earum aliquid assumenda hic similique mollitia saepe ab excepturi obcaecati quia asperiores. Minus, quam a quae dolores cupiditate quidem consectetur perspiciatis commodi eveniet, nulla fugiat unde dolore quibusdam suscipit sequi nisi eius. Aliquam quasi dicta officiis necessitatibus sequi sit libero facilis! Eligendi magni quos omnis minus nesciunt quas. Voluptas quod in dicta ipsam dignissimos deserunt cupiditate illo aperiam! Distinctio sapiente asperiores quam eum, eligendi ex exercitationem natus aut, beatae possimus praesentium. Repellat, qui esse iure, commodi inventore tempore similique nesciunt quasi eius corrupti laboriosam nisi ipsum placeat, earum quos debitis voluptates! Autem ipsam, nihil voluptatum repellendus eos officia laborum hic pariatur odio, ipsa dolorem ullam blanditiis accusamus nisi magni commodi inventore maxime, error explicabo quaerat aspernatur. Perspiciatis voluptatibus iusto earum ut cupiditate architecto rerum. Non consectetur laborum assumenda doloribus fuga excepturi voluptate tempore eveniet voluptatem. Expedita culpa, saepe, recusandae impedit sequi dicta veniam vel, voluptas aperiam odit ipsa adipisci reiciendis et dignissimos exercitationem illum tempora ducimus nam fugiat in architecto. Esse, laudantium tenetur saepe, corrupti quam expedita vero veritatis reiciendis iste pariatur cum quod aspernatur commodi cupiditate laboriosam eaque eius in ullam consectetur fugit voluptatibus. Itaque quaerat commodi at rerum alias eius est optio nihil delectus, dolor voluptatibus hic architecto consequatur quam quidem placeat! Rerum libero perspiciatis consectetur molestiae maiores molestias consequatur atque dolores amet neque numquam qui quaerat, voluptatem ullam, labore aspernatur distinctio asperiores esse, harum nobis dignissimos fuga voluptatum aliquam sunt! Dignissimos ab perspiciatis animi facilis temporibus? Maiores, laudantium harum? Voluptatem, incidunt ad! Debitis minus magnam, illum laboriosam voluptas dicta iure repudiandae sunt harum quam a, fugiat earum nostrum ab ea corporis impedit veniam suscipit adipisci consequatur quisquam saepe temporibus cupiditate! Praesentium, consequatur sit exercitationem aperiam commodi itaque earum ad iure dolore fuga fugiat magnam rem, velit ducimus adipisci, nulla tenetur veniam. Exercitationem molestiae quam omnis quia, eveniet quasi facere explicabo praesentium nulla ab odit ullam tenetur maxime, voluptas totam possimus. Cum ad soluta iste repellendus laudantium laborum provident minus atque similique? Debitis accusamus fugiat illum consequatur? Quisquam ut illum, repellat soluta dicta atque id at vero! Dolores tempore debitis commodi similique dolorem nesciunt animi mollitia, beatae fugiat illo soluta officiis tenetur qui esse nam necessitatibus eum porro. Iusto necessitatibus veniam dicta omnis iste a reiciendis esse quas tenetur in est eos, eaque inventore, animi sint? Optio totam, mollitia deserunt fugit voluptates, libero aliquid facilis impedit amet odit reiciendis nostrum, perferendis nesciunt sit beatae ea sequi. Temporibus vero aliquid natus qui molestias ea id, nam libero quibusdam magni? Aperiam repellendus, ea error voluptatem provident quisquam asperiores inventore voluptas optio. Facere, adipisci odio. Tempore quisquam obcaecati officiis id incidunt mollitia quo, maiores dolor eveniet provident voluptate sed modi reprehenderit laudantium sapiente nesciunt dolores magnam quam, consequatur accusantium at eos ad! Possimus fugit aut qui quae sapiente, error neque quis voluptatem! Quia incidunt perferendis corporis sint soluta blanditiis libero doloremque. Rem optio, recusandae omnis cupiditate quis illum natus, dignissimos asperiores, vel soluta mollitia! Doloremque deserunt eligendi voluptate. Voluptates fuga doloribus quidem eum, tempore dicta ut odit placeat, odio error soluta labore alias laborum, dignissimos rem aut nobis officia totam ipsam. Velit doloribus quibusdam eos officia autem numquam repudiandae asperiores quis adipisci maxime ea quas, voluptas repellat, reprehenderit blanditiis qui ex recusandae. Modi delectus molestias nihil soluta, expedita natus quidem aliquam nisi incidunt dicta, repellendus quod magnam asperiores omnis ipsam iure labore obcaecati autem quasi molestiae veritatis est, id mollitia quisquam. Beatae impedit inventore facilis sed, atque quisquam a. Modi mollitia, velit atque repellendus nesciunt ea possimus deserunt? Nam, rem at suscipit maiores voluptatem tempore facilis error necessitatibus molestias nihil hic placeat possimus tempora, itaque dicta! Natus, modi minus? Ipsum aut ullam, porro est accusantium totam ut nihil enim, magni illum consectetur? Architecto est laudantium itaque reprehenderit facere ipsam fuga? Dolor accusantium ipsum vitae excepturi deleniti. Nam beatae rem minima tenetur fugit iusto maxime blanditiis impedit eos, autem, consequatur repellendus delectus. Aliquam beatae dolores saepe, consequatur quas id quidem, expedita accusantium nesciunt itaque illum dolorum ratione nulla eos iste cumque asperiores minus? Quae, veritatis quia! Impedit assumenda deleniti aperiam incidunt nobis tempore, perferendis esse magni officia debitis! Dolorum saepe fugiat debitis soluta maiores id dolor magnam consectetur commodi dolorem voluptatem at iure magni, est quod qui nam autem esse cumque voluptates dicta. Accusantium aliquam nesciunt facilis, doloribus veritatis tenetur similique cupiditate in minima earum eveniet eum nam vel suscipit consectetur asperiores. Labore veniam exercitationem ullam reiciendis voluptatibus vero magni. Distinctio perferendis minus optio assumenda eligendi sed eaque. Fugit eius laborum dolore repellat, quos aliquam blanditiis eveniet molestiae nisi veritatis suscipit possimus architecto unde, minima, ex libero sunt? Dolor sapiente distinctio, dolorum fugiat, nisi quasi facilis praesentium asperiores ducimus repellendus pariatur corporis ipsum! Esse voluptates pariatur inventore, qui at minus debitis, laboriosam alias nobis dolorem fuga quos. Veniam officiis cum, autem voluptatem unde dignissimos illo nemo commodi nulla dolorum aspernatur! Libero enim, natus asperiores dolor atque tempora beatae consequuntur molestiae iure id blanditiis incidunt, reprehenderit, quas vero! Voluptas illum eaque itaque, sunt numquam labore nobis magnam molestiae dicta molestias commodi dolore expedita praesentium deleniti inventore enim? Fugiat nobis voluptatem placeat rem tempore nihil expedita excepturi ullam.</p>
-            </div>
-        </div>
+  const clinics = [
+    { name: "General", appointments: 10 },
+    { name: "Cardio", appointments: 180 },
+    { name: "Peds", appointments: 6 },
+    { name: "Ortho", appointments: 500 },
+    { name: "Neuro", appointments: 9 },
+    { name: "Onco", appointments: 4 },
+    { name: "Derm", appointments: 120 },
+    { name: "ENT", appointments: 300 },
+    { name: "Gastro", appointments: 15 },
+    { name: "Uro", appointments: 20 },
+  ];
 
-    );
+  const maxAppointments = Math.max(...clinics.map((c) => c.appointments));
+  return (
+    <div className="layout">
+      <AdminSidebar />
+      <div className="content">
+        <main className="flex-grow-1 p-4 overflow-auto">
+          {/* Header */}
+          <div className="mb-4">
+            <h3 className="fw-bold mb-1">System Overview</h3>
+            <small className="text-muted">
+              Welcome back, here's what's happening this month.
+            </small>
+          </div>
+
+          {/* Cards */}
+          <div className="row g-3 mb-4">
+            {/* Card 1 */}
+            <div className="col-md-6 col-lg-3">
+              <div className="card shadow-sm">
+                <div className="card-body">
+                  <div className="d-flex justify-content-between">
+                    <i className="bi bi-person fs-4 text-primary"></i>
+                    <span className="text-success small">+12%</span>
+                  </div>
+                  <p className="text-muted mb-0">Total Patients</p>
+                  <h4>1,284</h4>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div className="col-md-6 col-lg-3">
+              <div className="card shadow-sm">
+                <div className="card-body">
+                  <div className="d-flex justify-content-between">
+                    <i className="bi bi-heart-pulse fs-4 text-danger"></i>
+                    <span className="text-success small">+5%</span>
+                  </div>
+                  <p className="text-muted mb-0">Doctors</p>
+                  <h4>42</h4>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div className="col-md-6 col-lg-3">
+              <div className="card shadow-sm">
+                <div className="card-body">
+                  <div className="d-flex justify-content-between">
+                    <i className="bi bi-building fs-4 text-warning"></i>
+                    <span className="text-muted small">0%</span>
+                  </div>
+                  <p className="text-muted mb-0">Clinics</p>
+                  <h4>24</h4>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 4 */}
+            <div className="col-md-6 col-lg-3">
+              <div className="card shadow-sm">
+                <div className="card-body">
+                  <div className="d-flex justify-content-between">
+                    <i className="bi bi-calendar-check fs-4 text-success"></i>
+                    <span className="text-success small">+8%</span>
+                  </div>
+                  <p className="text-muted mb-0">Appointments (Monthly)</p>
+                  <h4>650</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Chart Section Placeholder */}
+          <div className="card shadow-sm p-4">
+            <div className="d-flex justify-content-between mb-3">
+              <div>
+                <h5 className="mb-0">Appointments per Clinic</h5>
+                <small className="text-muted">
+                  Distribution across departments
+                </small>
+              </div>
+
+              <select className="form-select w-auto">
+                <option>This Month</option>
+                <option>Last Month</option>
+              </select>
+            </div>
+
+            {/* Chart */}
+            <div
+              className="d-flex align-items-end gap-3 border p-3"
+              style={{ height: "350px" }}
+            >
+              {clinics.map((clinic, i) => {
+                const heightPercent =
+                  (clinic.appointments / maxAppointments) * 100;
+
+                return (
+                  <div
+                    key={i}
+                    className="flex-fill d-flex flex-column justify-content-end align-items-center"
+                    style={{ height: "100%" }}
+                  >
+                    {/* الرقم فوق العمود */}
+                    <small className="fw-bold mb-1">
+                      {clinic.appointments}
+                    </small>
+
+                    {/* هذا هو المهم */}
+                    <div
+                      className="bg-primary bg-opacity-50 rounded w-100"
+                      style={{
+                        height: `${heightPercent}%`,
+                        minHeight: "10px",
+                        transition: "height 0.3s ease",
+                      }}
+                    ></div>
+
+                    {/* الاسم */}
+                    <small className="text-muted mt-1">{clinic.name}</small>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
 }

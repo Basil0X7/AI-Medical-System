@@ -11,7 +11,6 @@ export default function AdminSidebar() {
 
   return (
     <div className="sidebar d-flex flex-column bg-white border-end p-3">
-
       {/* Logo Section */}
       <div className="d-flex align-items-center gap-2 mb-4">
         <div className="logo-box text-white rounded d-flex align-items-center justify-content-center">
@@ -27,44 +26,52 @@ export default function AdminSidebar() {
       {/* Navigation */}
       <nav className="flex-grow-1">
         <ul className="nav flex-column gap-2">
-
           <li>
-            <NavLink to="/" className={({ isActive }) =>
-              isActive ? "nav-link active rounded" : "nav-link text-dark"
-            }>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "nav-link active rounded" : "nav-link text-dark"
+              }
+            >
               <MdDashboard /> Dashboard
             </NavLink>
           </li>
 
           <li>
-            <NavLink to="/manage-clinics" className={({ isActive }) =>
-              isActive ? "nav-link active rounded" : "nav-link text-dark"
-            }
+            <NavLink
+              to="/manage-clinics"
+              className={({ isActive }) =>
+                location.pathname.startsWith("/manage-clinics") ||
+                location.pathname === "/add-clinic"
+                  ? "nav-link active rounded"
+                  : "nav-link text-dark"
+              }
               onClick={(e) => {
-                // إذا أنتِ أصلاً في نفس الصفحة → لا تعمل شيء
-                if (location.pathname === "/manage-clinics") {
-                  e.preventDefault(); // يمنع أي إعادة تنفيذ
+                if (location.pathname === "/manage-clinics" || location.pathname === "/add-clinic") {
+                  e.preventDefault();
                 }
-              }}>
+              }}
+            >
               <BiSolidClinic /> Manage Clinics
             </NavLink>
           </li>
 
           <li>
-            <NavLink to="/manage-doctors" className={({ isActive }) =>
-              isActive ? "nav-link active rounded" : "nav-link text-dark"
-            }>
+            <NavLink
+              to="/manage-doctors"
+              className={({ isActive }) =>
+                isActive ? "nav-link active rounded" : "nav-link text-dark"
+              }
+            >
               <FaUserDoctor /> Manage Doctors
             </NavLink>
           </li>
-
         </ul>
       </nav>
 
       {/* User Profile */}
       <div className="border-top pt-3 mt-auto">
         <div className="d-flex align-items-center gap-2 p-2 rounded hover-bg-light">
-
           <img
             src="https://via.placeholder.com/40"
             alt="user"
@@ -75,10 +82,8 @@ export default function AdminSidebar() {
             <p className="mb-0 fw-bold small">Dr. Sarah Miller</p>
             <small className="text-muted">Chief Surgeon</small>
           </div>
-
         </div>
       </div>
-
     </div>
   );
 }
