@@ -187,7 +187,7 @@ export default function AddClinic() {
                 <div className="card-body">
                   <h5 className="fw-bold mb-4">
                     <FaUsers className="me-2 text-primary" />
-                    Doctor Assignment
+                    Doctors Assignment
                   </h5>
 
                   <label className="form-label">Select Doctors</label>
