@@ -1,7 +1,7 @@
 import React from "react";
 import AdminSidebar from "../components/Admin-sidebar";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../styles/AdminSidebar.css";
 import Swal from "sweetalert2";
 import {
@@ -84,9 +84,6 @@ export default function AdminManageClinics() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchTerm]);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentClinics = filteredClinics.slice(
@@ -132,7 +129,10 @@ export default function AdminManageClinics() {
                   className="form-control"
                   placeholder="Search clinic..."
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    setCurrentPage(1);
+                  }}
                 />
               </div>
             </div>

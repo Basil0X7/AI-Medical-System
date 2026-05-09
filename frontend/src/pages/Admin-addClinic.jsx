@@ -6,7 +6,7 @@ import ClinicStatus from "../components/Admin-clinicStatus";
 import "../styles/AdminSidebar.css";
 import Swal from "sweetalert2";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   FaChevronRight,
   FaSave,
@@ -25,21 +25,11 @@ export default function AddClinic() {
   const location = useLocation();
   const clinic = location.state?.clinic;
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    location: "",
-    specialty: "",
+    name: clinic?.name || "",
+    description: clinic?.description || "",
+    location: clinic?.location || "",
+    specialty: clinic?.specialty || "",
   });
-  useEffect(() => {
-    if (clinic) {
-      setFormData({
-        name: clinic.name || "",
-        description: clinic.description || "",
-        location: clinic.location || "",
-        specialty: clinic.specialty || "",
-      });
-    }
-  }, [clinic]);
 
   const [workingHours, setWorkingHours] = useState({
     Sunday: { status: "Open", open: "", close: "" },
@@ -292,7 +282,7 @@ export default function AddClinic() {
                   </thead>
 
                   <tbody>
-                    {Object.keys(workingHours).map((day) => (
+                    {days.map((day) => (
                       <tr key={day}>
                         {/* Day */}
                         <td className="fw-semibold">{day}</td>
