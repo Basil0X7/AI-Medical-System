@@ -1,30 +1,25 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import ForgotPassword from "./pages/ForgotPassword";
-
-import AI_SymptomChecker from "./pages/AI_SymptomChecker";
-import AI_Result from "./pages/AI_Result";
+//import { useState } from 'react'
+import { Routes, Route } from "react-router-dom";
+import AdminManageDoctors from "./pages/Admin-manageDoctors";
+import AddDoctor from "./pages/AddDoctor";
+import EditPersonalInfo from "./pages/EditPersonalInfo";
+import EditDoctor from "./pages/EditDoctor";
 
 function App() {
-    return (
-        <BrowserRouter>
-            <Routes>
+  //const [count, setCount] = useState(0)
 
-                {/* Auth Pages */}
-                <Route path="/" element={<Login />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
+  return (
+    <Routes>
+      {/* الصفحة الرئيسية */}
+      <Route path="/" element={<AdminManageDoctors />} />
 
-                {/* AI System Pages */}
-                <Route path="/ai-symptom" element={<AI_SymptomChecker />} />
-                <Route path="/ai-result" element={<AI_Result />} />
-
-            </Routes>
-        </BrowserRouter>
-    );
+      <Route path="/manage-doctors" element={<AdminManageDoctors />} />
+      <Route path="/manage-doctors/add" element={<AddDoctor />} />
+      <Route path="/profile/edit" element={<EditPersonalInfo />} />
+      <Route path="/manage-doctors/edit/:id" element={<EditDoctor />} />
+      <Route path="/profile/edit" element={<EditPersonalInfo />} />
+    </Routes>
+  );
 }
 
 export default App;
