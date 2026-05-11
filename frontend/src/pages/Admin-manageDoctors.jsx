@@ -267,6 +267,6 @@ export default function AdminManageDoctors() {
           </div>
         </div>
       </main>
-    </div>
+      </div>
   );
 }
