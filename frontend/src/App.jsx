@@ -5,7 +5,7 @@ import AddClinic from "./pages/Admin-addClinic";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0)
+  //const [count, setCount] = useState(0)
 
   return (
     <Routes>
@@ -16,4 +16,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

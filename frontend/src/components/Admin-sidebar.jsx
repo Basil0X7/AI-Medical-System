@@ -4,11 +4,9 @@ import { BiSolidClinic } from "react-icons/bi";
 import { FaUserDoctor } from "react-icons/fa6";
 import logo from "../assets/logo-admin.PNG";
 import "../styles/AdminSidebar.css";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function AdminSidebar() {
-  const location = useLocation();
-
   return (
     <div className="sidebar d-flex flex-column bg-white border-end p-3">
       {/* Logo Section */}
@@ -41,16 +39,8 @@ export default function AdminSidebar() {
             <NavLink
               to="/manage-clinics"
               className={({ isActive }) =>
-                location.pathname.startsWith("/manage-clinics") ||
-                location.pathname === "/add-clinic"
-                  ? "nav-link active rounded"
-                  : "nav-link text-dark"
+                isActive ? "nav-link active rounded" : "nav-link text-dark"
               }
-              onClick={(e) => {
-                if (location.pathname === "/manage-clinics" || location.pathname === "/add-clinic") {
-                  e.preventDefault();
-                }
-              }}
             >
               <BiSolidClinic /> Manage Clinics
             </NavLink>
@@ -71,18 +61,21 @@ export default function AdminSidebar() {
 
       {/* User Profile */}
       <div className="border-top pt-3 mt-auto">
-        <div className="d-flex align-items-center gap-2 p-2 rounded hover-bg-light">
+        <NavLink
+          to="/profile/edit"
+          className="d-flex align-items-center gap-2 p-2 rounded hover-bg-light text-decoration-none text-dark"
+        >
           <img
-            src="https://via.placeholder.com/40"
-            alt="user"
+            src="https://i.pravatar.cc/40?img=5"
+            alt="Admin"
             className="rounded-circle"
           />
 
           <div className="min-w-0">
-            <p className="mb-0 fw-bold small">Dr. Sarah Miller</p>
-            <small className="text-muted">Chief Surgeon</small>
+            <p className="mb-0 fw-bold small">Alex Rivers</p>
+            <small className="text-muted">Administrator</small>
           </div>
-        </div>
+        </NavLink>
       </div>
     </div>
   );
