@@ -18,7 +18,7 @@ export default function EditPersonalInfo() {
     phone: "+1 (555) 092-4322",
     currentPassword: "",
     newPassword: "",
-    confirmPassword: "",
+    confirmPassword: "" ,
   });
 
   const handleChange = (e) => {
