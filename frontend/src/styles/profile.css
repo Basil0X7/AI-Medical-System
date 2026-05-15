@@ -1,7 +1,6 @@
 
 /* ======================
    GLOBAL APP
-====================== */
 .app {
   display: flex;
   min-height: 100vh;
@@ -12,7 +11,6 @@
 
 /* ======================
    SIDEBAR
-====================== */
 .sidebar {
   width: 260px;
   background: #ffffff;
@@ -48,7 +46,6 @@
 
 /* ======================
    MAIN
-====================== */
 .main {
   flex: 1;
   padding: 20px;
@@ -56,7 +53,6 @@
 
 /* ======================
    TOPBAR
-====================== */
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -78,7 +74,6 @@
 
 /* ======================
    PROFILE CARD
-====================== */
 .profile-card {
   margin-top: 20px;
   background: white;
@@ -119,7 +114,6 @@
 
 /* ======================
    STATS
-====================== */
 .stats {
   display: flex;
   gap: 15px;
@@ -143,7 +137,6 @@
 
 /* ======================
    DARK MODE
-====================== */
 .dark {
   background: #121212;
   color: white;

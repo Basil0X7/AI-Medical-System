@@ -1,31 +1,29 @@
-import { Routes, Route } from "react-router-dom";
-
-import AdminLayout from "./layout/AdminLayout";
-
-import AdminDashboard from "./pages/Admin-dashboard";
 import AdminManageClinics from "./pages/Admin-manageClinics";
-import AddClinic from "./pages/Admin-addClinic";
-import ScheduleManagement from "./pages/ScheduleManagement";
-import PatientManagement from "./pages/PatientManagement";
-import ProfileManagement from "./pages/ProfileManagement";
-import AddAppointment from "./pages/AddAppointment";
-import WriteMedicalReport from "./pages/WriteMedicalReport";
+import AdminDashboard from "./pages/Admin-dashboard";
+import AddClinic from "./pages/Admin-addclinic";
+import Home from "./pages/Home";
+import Clinics from "./pages/Clinics";
+import BookAppointment from "./pages/BookAppointment";
+import Appointments from "./pages/Appointments";
+import Profile from "./pages/Profile";
+import Contact from "./pages/Contact";
+import SymptomChecker from "./pages/SymptomChecker";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/clinics" element={<Clinics />} />
 
-      <Route element={<AdminLayout />}>
-        <Route path="/" element={<AdminDashboard />} />
-        <Route path="/manage-clinics" element={<AdminManageClinics />} />
-        <Route path="/add-clinic" element={<AddClinic />} />
-        <Route path="/schedule" element={<ScheduleManagement />} />
-        <Route path="/patients" element={<PatientManagement />} />
-        <Route path="/profile" element={<ProfileManagement />} />
-        <Route path="/add-appointment" element={<AddAppointment />} />
-        <Route path="/write-report" element={<WriteMedicalReport />} />
-      </Route>
-
+      <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/manage-clinics" element={<AdminManageClinics />} />
+      <Route path="/add-clinic" element={<AddClinic />} />
+      <Route path="/book-appointment" element={<BookAppointment />} />
+      <Route path="/appointments" element={<Appointments />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/symptom-checker" element={<SymptomChecker />} />
     </Routes>
   );
 }
