@@ -184,6 +184,7 @@ export default function AdminManageDoctors() {
                               objectFit: "cover",
                             }}
                           />
+
                           <span className="fw-semibold">{doctor.name}</span>
                         </div>
                       </td>
@@ -267,6 +268,6 @@ export default function AdminManageDoctors() {
           </div>
         </div>
       </main>
-      </div>
+    </div>
   );
 }

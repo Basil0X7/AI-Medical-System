@@ -1,4 +1,4 @@
-//import { useState } from 'react'
+
 import { Routes, Route } from "react-router-dom";
 import AdminManageDoctors from "./pages/Admin-manageDoctors";
 import AddDoctor from "./pages/AddDoctor";
@@ -6,7 +6,7 @@ import EditPersonalInfo from "./pages/EditPersonalInfo";
 import EditDoctor from "./pages/EditDoctor";
 
 function App() {
-  //const [count, setCount] = useState(0)
+ 
 
   return (
     <Routes>

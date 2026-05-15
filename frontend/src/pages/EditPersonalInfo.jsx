@@ -8,14 +8,14 @@ export default function EditPersonalInfo() {
   const navigate = useNavigate();
 
   const [profileImage, setProfileImage] = useState(
-    "https://i.pravatar.cc/100?img=12",
+     "https://i.pravatar.cc/100?img=12",
   );
 
   const [profile, setProfile] = useState({
     fullName: "Alex Rivers",
     role: "Administrator",
     email: "alex.rivers@medadmin.org",
-    phone: "+1 (555) 092-4322",
+    phone:  "+1 (555) 092-4322",
     currentPassword: "",
     newPassword: "",
     confirmPassword: "" ,
