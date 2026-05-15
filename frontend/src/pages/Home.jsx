@@ -1,6 +1,7 @@
 import "../styles/home.css";
 import heroImage from "../assets/hospital.jpg";
 import Navbar from "../components/Navbar";
+import { Link } from "react-router-dom";
 
 import {
   FaTooth,
@@ -92,8 +93,13 @@ function Home() {
           </p>
 
           <div className="hero-buttons">
-            <button className="primary-btn">Book Appointment</button>
-            <button className="outline-btn">Our Specialists</button>
+            <Link to="/book-appointment" className="primary-btn">
+              Book Appointment
+            </Link>
+
+            <Link to="/clinics" className="outline-btn">
+              Our Specialists
+            </Link>
           </div>
         </div>
       </section>
@@ -115,7 +121,9 @@ function Home() {
                 <h3>{clinic.title}</h3>
                 <p>{clinic.text}</p>
 
-                <button>View Details</button>
+                <Link to="/book-appointment" className="view-details-btn">
+                  View Details
+                </Link>
               </div>
             ))}
           </div>
@@ -133,9 +141,9 @@ function Home() {
               by medical expertise.
             </p>
 
-            <button>
+            <Link to="/symptom-checker" className="ai-button">
               Analyze Your Symptoms with AI <HiSparkles />
-            </button>
+            </Link>
 
             <small>
               <FaShieldAlt /> Secure & Confidential Analysis
