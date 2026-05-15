@@ -1,0 +1,61 @@
+/* Sidebar Container */
+.sidebar {
+    width: 250px;
+    min-width: 250px;
+    max-width: 250px;
+    flex-shrink: 0;
+    height: 100vh;
+}
+
+/* Logo */
+.logo-box {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+}
+
+.logo-img {
+    width: 200%;
+    height: 100%;
+}
+
+/* Navigation */
+.sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 400;
+    padding: 8px 10px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #f1f5f9;
+    border-radius: 8px;
+}
+
+.sidebar .nav-link.active {
+    background-color: rgba(13, 110, 253, 0.1);
+    color: #0d6efd;
+}
+
+/* User Profile Hover */
+.hover-bg-light:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+/* Layout */
+.layout {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    /* يمنع scroll على الصفحة كلها */
+}
+
+/* Content (اليمين) */
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    height: 100vh;
+}
