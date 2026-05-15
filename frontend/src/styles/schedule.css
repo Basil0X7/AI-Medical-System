@@ -1,0 +1,395 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Manrope', sans-serif;
+}
+
+.schedule-page {
+    display: flex;
+    background: #f4f6f9;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 260px;
+    background: white;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+}
+
+.logo-section {
+    margin-bottom: 40px;
+}
+
+.logo-section h1 {
+    color: #0f52ba;
+    margin-bottom: 5px;
+}
+
+.logo-section p {
+    color: gray;
+    font-size: 14px;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    color: #555;
+    padding: 14px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: 0.3s;
+}
+
+.sidebar-menu a:hover {
+    background: #eef4ff;
+}
+
+.sidebar-menu .active {
+    background: #dbe8ff;
+    color: #0f52ba;
+    font-weight: bold;
+}
+
+.emergency-btn {
+    margin-top: auto;
+    background: #d32f2f;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+/* MAIN */
+
+.main-content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+}
+
+/* HEADER */
+
+.top-header {
+    height: 80px;
+    background: white;
+    border-bottom: 1px solid #ddd;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-box {
+    width: 350px;
+    background: #f4f4f4;
+    border-radius: 30px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+    margin-left: 10px;
+    width: 100%;
+}
+
+.doctor-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.doctor-profile img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.doctor-profile h4 {
+    font-size: 14px;
+}
+
+.doctor-profile p {
+    font-size: 12px;
+    color: gray;
+}
+
+/* PAGE HEADER */
+
+.page-header {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-header h2 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: gray;
+}
+
+.week-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.prev-btn,
+.next-btn {
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+}
+
+.prev-btn {
+    background: #dbe8ff;
+    color: #0f52ba;
+}
+
+.next-btn {
+    background: #0f52ba;
+    color: white;
+}
+
+.calendar-grid {
+    padding: 0 30px 30px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.day-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.day-header {
+    background: #e9edf3;
+    padding: 16px;
+    border-radius: 14px 14px 0 0;
+    border-bottom: 3px solid #0f52ba;
+}
+
+.day-header p {
+    font-size: 12px;
+    color: gray;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.day-header h3 {
+    font-size: 22px;
+}
+
+.appointment-card {
+    background: white;
+    padding: 16px;
+    border-radius: 14px;
+    border-left: 5px solid #0f52ba;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.appointment-card.urgent {
+    border-left: 5px solid #d32f2f;
+}
+
+.appointment-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.time {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.time.blue {
+    background: #dbe8ff;
+    color: #0f52ba;
+}
+
+.time.red {
+    background: #ffdede;
+    color: #d32f2f;
+}
+
+.urgent-icon {
+    color: #d32f2f;
+}
+
+.appointment-card h4 {
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+.appointment-card p {
+    color: gray;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.available-slot {
+    border: 2px dashed #bbb;
+    padding: 35px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.available-slot:hover {
+    background: #f9f9f9;
+}
+
+.stats-section {
+    padding: 0 30px 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.stat-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blue-bg {
+    background: #dbe8ff;
+    color: #0f52ba;
+}
+
+.cyan-bg {
+    background: #dff7ff;
+    color: #0099cc;
+}
+
+.red-bg {
+    background: #ffdede;
+    color: #d32f2f;
+}
+
+.stat-card p {
+    color: gray;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.stat-card h3 {
+    font-size: 28px;
+}
+
+@media(max-width:1200px) {
+
+    .calendar-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width:768px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .top-header {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .calendar-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .week-buttons {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .prev-btn,
+    .next-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
