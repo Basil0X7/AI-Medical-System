@@ -39,8 +39,16 @@ export default function AdminSidebar() {
             <NavLink
               to="/manage-clinics"
               className={({ isActive }) =>
-                isActive ? "nav-link active rounded" : "nav-link text-dark"
+                location.pathname.startsWith("/manage-clinics") ||
+                location.pathname === "/add-clinic"
+                  ? "nav-link active rounded"
+                  : "nav-link text-dark"
               }
+              onClick={(e) => {
+                if (location.pathname === "/manage-clinics" || location.pathname === "/add-clinic") {
+                  e.preventDefault();
+                }
+              }}
             >
               <BiSolidClinic /> Manage Clinics
             </NavLink>

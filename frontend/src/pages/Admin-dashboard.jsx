@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AdminSidebar from "../components/Admin-sidebar";
 import "../styles/AdminSidebar.css";
 
@@ -15,7 +15,17 @@ export default function AdminDashboard() {
     { name: "Gastro", appointments: 15 },
     { name: "Uro", appointments: 20 },
   ];
+  const [clinicsCount, setClinicsCount] = useState(0);
+  useEffect(() => {
+    const fetchClinics = async () => {
+      const res = await fetch("http://localhost:5001/api/manage-clinics");
+      const data = await res.json();
 
+      setClinicsCount(data.length);
+    };
+
+    fetchClinics();
+  }, []);
   const maxAppointments = Math.max(...clinics.map((c) => c.appointments));
   return (
     <div className="layout">
@@ -69,7 +79,7 @@ export default function AdminDashboard() {
                     <span className="text-muted small">0%</span>
                   </div>
                   <p className="text-muted mb-0">Clinics</p>
-                  <h4>24</h4>
+                  <h4>{clinicsCount}</h4>
                 </div>
               </div>
             </div>

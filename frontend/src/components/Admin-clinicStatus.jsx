@@ -1,18 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function ClinicStatus() {
-  const [status, setStatus] = useState("Active");
-
+export default function ClinicStatus({ status, setStatus }) {
   return (
     <div>
       {/* Title */}
-      <label className="form-label mb-2">
-        Clinic Status
-      </label>
+      <label className="form-label mb-2">Clinic Status</label>
 
       {/* Container */}
       <div className="bg-light rounded-3 p-1 d-flex gap-1 w-100">
-
         {/* Active */}
         <button
           type="button"
@@ -51,7 +46,6 @@ export default function ClinicStatus() {
         >
           Not Active
         </button>
-
       </div>
     </div>
   );

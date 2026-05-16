@@ -1,30 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaImage } from "react-icons/fa";
 
-export default function ClinicImageUpload() {
-
-  // لتخزين الصورة المختارة
-  const [preview, setPreview] = useState(null);
-
-  // عند اختيار صورة
+export default function ClinicImageUpload({
+  preview,
+  setPreview,
+  setImageFile,
+}) {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
 
     if (file) {
+      setImageFile(file);
+
       const imageURL = URL.createObjectURL(file);
+
       setPreview(imageURL);
     }
   };
 
   return (
     <div className="col-md-6">
+      <label className="form-label">Clinic Image</label>
 
-      {/* Title */}
-      <label className="form-label">
-        Clinic Image
-      </label>
-
-      {/* Input مخفي */}
       <input
         type="file"
         id="clinicImage"
@@ -33,7 +30,6 @@ export default function ClinicImageUpload() {
         onChange={handleImageChange}
       />
 
-      {/* Box */}
       <label
         htmlFor="clinicImage"
         className="border border-2 border-secondary-subtle rounded-4 bg-light d-flex flex-column justify-content-center align-items-center overflow-hidden"
@@ -43,14 +39,14 @@ export default function ClinicImageUpload() {
           minHeight: "220px",
         }}
       >
-
-        {/* إذا في صورة */}
         {preview ? (
           <img
             src={preview}
             alt="Clinic"
             className="w-100 h-100 object-fit-cover rounded-4"
-            style={{ maxHeight: "220px" }}
+            style={{
+              maxHeight: "220px",
+            }}
           />
         ) : (
           <>
@@ -61,7 +57,6 @@ export default function ClinicImageUpload() {
             </p>
           </>
         )}
-
       </label>
     </div>
   );

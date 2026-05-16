@@ -1,7 +1,7 @@
 import React from "react";
 import AdminSidebar from "../components/Admin-sidebar";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/AdminSidebar.css";
 import Swal from "sweetalert2";
 import {
@@ -14,72 +14,38 @@ import {
 } from "react-icons/fa";
 
 export default function AdminManageClinics() {
-  const clinics = [
-    {
-      id: 1,
-      name: "City General Cardiology",
-      specialty: "Cardiology",
-      location: "Building A, Floor 3",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Metropolitan Pediatrics",
-      specialty: "Pediatrics",
-      location: "Building B, Floor 1",
-      status: "Active",
-    },
-    {
-      id: 3,
-      name: "Westside Orthopedics",
-      specialty: "Orthopedics",
-      location: "Building C, Floor 2",
-      status: "Maintenance",
-    },
-    {
-      id: 4,
-      name: "Downtown Neurology",
-      specialty: "Neurology",
-      location: "Building A, Floor 4",
-      status: "Active",
-    },
-    {
-      id: 5,
-      name: "Vision Care Center",
-      specialty: "Ophthalmology",
-      location: "Building D, Floor 1",
-      status: "Active",
-    },
-    {
-      id: 6,
-      name: "Sunset Dermatology",
-      specialty: "Dermatology",
-      location: "Building E, Floor 2",
-      status: "Active",
-    },
-    {
-      id: 7,
-      name: "Lakeside ENT Clinic",
-      specialty: "ENT",
-      location: "Building F, Floor 3",
-      status: "Maintenance",
-    },
-    {
-      id: 8,
-      name: "Central Gastroenterology",
-      specialty: "Gastroenterology",
-      location: "Building G, Floor 1",
-      status: "Active",
-    },
-  ];
+  const [clinics, setClinics] = useState([]);
+
+  const fetchClinics = async () => {
+    try {
+      const response = await fetch("http://localhost:5001/api/manage-clinics");
+
+      const data = await response.json();
+
+      setClinics(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchClinics();
+  }, []);
 
   const [searchTerm, setSearchTerm] = useState("");
   const filteredClinics = clinics.filter(
     (clinic) =>
-      clinic.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      clinic.specialty.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      clinic.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      clinic.status.toLowerCase().includes(searchTerm.toLowerCase()),
+      (clinic.clinicName || "")
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      (clinic.clinicSpecialty || "")
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      (clinic.clinicLocation || "")
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      (clinic.clinicStatus || "")
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()),
   );
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -93,14 +59,46 @@ export default function AdminManageClinics() {
 
   const totalPages = Math.ceil(filteredClinics.length / itemsPerPage);
 
-  // const [clinicss, setClinics] = useState([]);
-  // const [selectedClinic, setSelectedClinic] = useState(null);
-  // const [isEdit, setIsEdit] = useState(false);
   // تغيير لون الحالة
   const getStatusBadge = (status) => {
     return status === "Active"
       ? "badge bg-success"
-      : "badge bg-warning text-dark";
+      : status === "Not Active"
+        ? "badge bg-danger"
+        : "badge bg-warning text-dark";
+  };
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5001/api/manage-clinics/${id}`,
+        {
+          method: "DELETE",
+        },
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+
+      Swal.fire({
+        toast: true,
+        position: "top",
+        icon: "success",
+        title: "Deleted successfully",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+
+      // تحديث القائمة
+      setClinics((prev) => prev.filter((c) => c.id !== id));
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: error.message,
+      });
+    }
   };
   return (
     <div className="layout">
@@ -165,21 +163,21 @@ export default function AdminManageClinics() {
                 <tbody>
                   {currentClinics.map((clinic) => (
                     <tr key={clinic.id}>
-                      <td className="fw-semibold">{clinic.name}</td>
-                      <td>{clinic.specialty}</td>
-                      <td>{clinic.location}</td>
+                      <td className="fw-semibold">{clinic.clinicName}</td>
+                      <td>{clinic.clinicSpecialty}</td>
+                      <td>{clinic.clinicLocation}</td>
 
                       {/* الحالة */}
                       <td>
-                        <span className={getStatusBadge(clinic.status)}>
-                          {clinic.status}
+                        <span className={getStatusBadge(clinic.clinicStatus)}>
+                          {clinic.clinicStatus}
                         </span>
                       </td>
 
                       {/* الأزرار */}
                       <td className="text-end">
                         <Link
-                          to="/add-clinic"
+                          to={`/add-clinic/${clinic.id}`}
                           state={{ clinic }}
                           className="btn btn-sm btn-outline-primary me-2"
                         >
@@ -199,14 +197,7 @@ export default function AdminManageClinics() {
                               confirmButtonText: "Yes, delete it!",
                             }).then((result) => {
                               if (result.isConfirmed) {
-                                Swal.fire({
-                                  toast: true,
-                                  position: "top",
-                                  icon: "success",
-                                  title: "Clinic deleted successfully",
-                                  showConfirmButton: false,
-                                  timer: 2000,
-                                });
+                                handleDelete(clinic.id);
                               }
                             });
                           }}
@@ -237,15 +228,6 @@ export default function AdminManageClinics() {
                   <FaChevronLeft />
                 </button>
 
-                {/* <button className="btn btn-sm btn-primary me-2">1</button>
-
-                <button className="btn btn-sm btn-outline-secondary me-2">
-                  2
-                </button>
-
-                <button className="btn btn-sm btn-outline-secondary me-2">
-                  3
-                </button> */}
                 {[...Array(totalPages)].map((_, index) => (
                   <button
                     key={index}

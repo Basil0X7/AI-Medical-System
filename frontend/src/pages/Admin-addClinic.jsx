@@ -1,12 +1,11 @@
 import React from "react";
 import AdminSidebar from "../components/Admin-sidebar";
-import { Link } from "react-router-dom";
 import ClinicImageUpload from "../components/Admin-UploadImage";
 import ClinicStatus from "../components/Admin-clinicStatus";
 import "../styles/AdminSidebar.css";
 import Swal from "sweetalert2";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
   FaChevronRight,
   FaSave,
@@ -21,16 +20,83 @@ import {
 } from "react-icons/fa";
 
 export default function AddClinic() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const clinic = location.state?.clinic;
-  const [formData, setFormData] = useState({
-    name: clinic?.name || "",
-    description: clinic?.description || "",
-    location: clinic?.location || "",
-    specialty: clinic?.specialty || "",
-  });
+  const doctorsList = [
+    "Dr. Emily Stone",
+    "Dr. Michael Chen",
+    "Dr. Sarah Wilson",
+    "Dr. David Lee",
+    "Dr. Jessica Brown",
+    "Dr. Daniel Kim",
+    "Dr. Laura Davis",
+    "Dr. James Miller",
+    "Dr. Olivia Garcia",
+    "Dr. Robert Martinez",
+  ];
+  const [selectedDoctors, setSelectedDoctors] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredDoctors = doctorsList.filter((doc) =>
+    doc.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+  const handleSelectDoctor = (doctor) => {
+    if (!selectedDoctors.includes(doctor)) {
+      setSelectedDoctors([...selectedDoctors, doctor]);
+    }
+    setSearchTerm("");
+  };
+  const handleRemoveDoctor = (doctor) => {
+    setSelectedDoctors(selectedDoctors.filter((d) => d !== doctor));
+  };
+  const [errors, setErrors] = useState({});
+  const validateForm = () => {
+    let newErrors = {};
 
+    if (!formData.name.trim()) {
+      newErrors.name = "Clinic name is required";
+    }
+
+    if (!formData.description.trim()) {
+      newErrors.description = "Description is required";
+    }
+
+    if (!formData.location.trim()) {
+      newErrors.location = "Location is required";
+    }
+
+    if (!formData.specialty || formData.specialty === "Clinic Specialty...") {
+      newErrors.specialty = "Specialty is required";
+    }
+
+    Object.keys(workingHours).forEach((day) => {
+      const currentDay = workingHours[day];
+
+      if (currentDay.status === "Open") {
+        if (!currentDay.open) {
+          newErrors[`${day}-open`] = "Opening time is required";
+        }
+
+        if (!currentDay.close) {
+          newErrors[`${day}-close`] = "Closing time is required";
+        }
+      }
+    });
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    location: "",
+    specialty: "",
+    status: "Active",
+    image: "",
+  });
+  const [imageFile, setImageFile] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [workingHours, setWorkingHours] = useState({
     Sunday: { status: "Open", open: "", close: "" },
     Monday: { status: "Open", open: "", close: "" },
@@ -41,6 +107,103 @@ export default function AddClinic() {
     Saturday: { status: "Closed", open: "", close: "" },
   });
   const days = Object.keys(workingHours);
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchClinic = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5001/api/manage-clinics/${id}`,
+        );
+
+        const data = await response.json();
+
+        setFormData({
+          name: data.clinicName || "",
+          description: data.clinicDescription || "",
+          location: data.clinicLocation || "",
+          specialty: data.clinicSpecialty || "",
+          status: data.clinicStatus || "Active",
+        });
+
+        // الصورة
+        if (data.clinicImage) {
+          setPreview(`http://localhost:5001/uploads/${data.clinicImage}`);
+        }
+
+        // working hours
+        const formattedHours = {};
+
+        data.ClinicWorkingHours.forEach((hour) => {
+          formattedHours[hour.dayName] = {
+            status: hour.status,
+            open: hour.openTime?.slice(0, 5) || "",
+            close: hour.closeTime?.slice(0, 5) || "",
+          };
+        });
+
+        setWorkingHours(formattedHours);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchClinic();
+  }, [id]);
+  const handleSaveClinic = async () => {
+    if (!validateForm()) return;
+    try {
+      const url = id
+        ? `http://localhost:5001/api/manage-clinics/${id}`
+        : "http://localhost:5001/api/manage-clinics";
+
+      const method = id ? "PUT" : "POST";
+      const dataToSend = new FormData();
+
+      dataToSend.append("clinicName", formData.name);
+      dataToSend.append("clinicDescription", formData.description);
+      dataToSend.append("clinicLocation", formData.location);
+      dataToSend.append("clinicStatus", formData.status);
+      dataToSend.append("clinicSpecialty", formData.specialty);
+      dataToSend.append("workingHours", JSON.stringify(workingHours));
+
+      if (imageFile) {
+        dataToSend.append("clinicImage", imageFile);
+      }
+
+      const response = await fetch(url, {
+        method,
+        body: dataToSend,
+      });
+
+      const data = await response.json();
+
+      console.log(data);
+
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+
+      Swal.fire({
+        toast: true,
+        position: "top",
+        icon: "success",
+        title: id ? "Clinic updated successfully" : "Clinic added successfully",
+        showConfirmButton: false,
+        timer: 2000,
+      }).then(() => {
+        navigate("/manage-clinics");
+      });
+    } catch (error) {
+      console.error(error);
+
+      Swal.fire({
+        icon: "error",
+        title: error.message,
+      });
+    }
+  };
+
   return (
     <div className="layout">
       <AdminSidebar />
@@ -77,14 +240,12 @@ export default function AddClinic() {
 
             {/* الصفحة الحالية */}
             <span className="fw-semibold text-dark">
-              {clinic ? "Edit Clinic" : "Add New Clinic"}
+              {id ? "Edit Clinic" : "Add New Clinic"}
             </span>
           </div>
           {/* Header */}
           <div className="mb-4">
-            <h2 className="fw-bold">
-              {clinic ? "Edit Clinic" : "Add New Clinic"}
-            </h2>
+            <h2 className="fw-bold">{id ? "Edit Clinic" : "Add New Clinic"}</h2>
             <p className="text-muted">
               Register a new medical facility within the hospital management
               system.
@@ -107,16 +268,25 @@ export default function AddClinic() {
                   <label className="form-label">Clinic Name</label>
                   <input
                     type="text"
-                    className="form-control"
+                    className={`form-control ${
+                      errors.name ? "is-invalid" : ""
+                    }`}
                     placeholder="North Wing Cardiology"
                     value={formData.name}
-                    onChange={(e) =>
+                    onChange={(e) => {
                       setFormData({
                         ...formData,
                         name: e.target.value,
-                      })
-                    }
+                      });
+                      setErrors({
+                        ...errors,
+                        name: "",
+                      });
+                    }}
                   />
+                  {errors.name && (
+                    <small className="text-danger">{errors.name}</small>
+                  )}
                 </div>
 
                 {/* Description */}
@@ -124,23 +294,36 @@ export default function AddClinic() {
                   <label className="form-label">Clinic Description</label>
                   <textarea
                     rows="3"
-                    className="form-control"
+                    className={`form-control ${
+                      errors.description ? "is-invalid" : ""
+                    }`}
                     placeholder="Clinic details..."
                     value={formData.description}
-                    onChange={(e) =>
+                    onChange={(e) => {
                       setFormData({
                         ...formData,
                         description: e.target.value,
-                      })
-                    }
+                      });
+                      setErrors({
+                        ...errors,
+                        description: "",
+                      });
+                    }}
                   ></textarea>
+                  {errors.description && (
+                    <small className="text-danger">{errors.description}</small>
+                  )}
                 </div>
 
                 {/* Row جديد */}
                 <div className="row g-3">
                   {/* Clinic Image */}
 
-                  <ClinicImageUpload />
+                  <ClinicImageUpload
+                    preview={preview}
+                    setPreview={setPreview}
+                    setImageFile={setImageFile}
+                  />
                   {/* ===================== */}
                   <div className="col-md-6 mt-4">
                     {/* Location */}
@@ -154,22 +337,39 @@ export default function AddClinic() {
 
                         <input
                           type="text"
-                          className="form-control"
+                          className={`form-control ${
+                            errors.location ? "is-invalid" : ""
+                          }`}
                           placeholder="Room / Building / Floor"
                           value={formData.location}
-                          onChange={(e) =>
+                          onChange={(e) => {
                             setFormData({
                               ...formData,
                               location: e.target.value,
-                            })
-                          }
+                            });
+                            setErrors({
+                              ...errors,
+                              location: "",
+                            });
+                          }}
                         />
                       </div>
+                      {errors.location && (
+                        <small className="text-danger">{errors.location}</small>
+                      )}
                     </div>
 
                     {/* Status */}
                     <div className="mt-3">
-                      <ClinicStatus />
+                      <ClinicStatus
+                        status={formData.status}
+                        setStatus={(value) =>
+                          setFormData({
+                            ...formData,
+                            status: value,
+                          })
+                        }
+                      />
                     </div>
                   </div>
                 </div>
@@ -178,7 +378,7 @@ export default function AddClinic() {
           </div>
 
           {/* ============================ */}
-          {/* Doctors + Services */}
+          {/* Doctors + Specialty */}
           {/* ============================ */}
           <div className="row g-4 mb-4">
             {/* Doctors */}
@@ -201,12 +401,50 @@ export default function AddClinic() {
                         type="text"
                         className="form-control"
                         placeholder="Select doctors..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                       />
+                      {searchTerm && (
+                        <div className="border rounded bg-white position-absolute w-100 shadow-sm z-3">
+                          {filteredDoctors.length > 0 ? (
+                            filteredDoctors.map((doc, index) => (
+                              <div
+                                key={index}
+                                className="p-2 hover-bg"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => handleSelectDoctor(doc)}
+                              >
+                                {doc}
+                              </div>
+                            ))
+                          ) : (
+                            <div className="p-2 text-muted">
+                              No doctors found
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
-
-                  {/* Selected Doctors */}
                   <div className="d-flex flex-wrap gap-2 mt-2">
+                    {selectedDoctors.map((doc, index) => (
+                      <span
+                        key={index}
+                        className="badge bg-light text-dark p-2 d-flex align-items-center"
+                        style={{ cursor: "default" }}
+                      >
+                        {doc}
+
+                        <FaTimes
+                          className="ms-2"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => handleRemoveDoctor(doc)}
+                        />
+                      </span>
+                    ))}
+                  </div>
+                  {/* Selected Doctors */}
+                  {/* <div className="d-flex flex-wrap gap-2 mt-2">
                     <span className="badge bg-light text-dark p-2">
                       Dr. Emily Stone <FaTimes className="ms-1" />
                     </span>
@@ -227,7 +465,7 @@ export default function AddClinic() {
                     <span className="badge bg-light text-dark p-2">
                       Dr. Emily Stone <FaTimes className="ms-1" />
                     </span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -244,20 +482,29 @@ export default function AddClinic() {
                   <label className="form-label">Select Specialty</label>
 
                   <select
-                    className="form-select mb-3"
+                    className={`form-select mb-3 ${
+                      errors.specialty ? "is-invalid" : ""
+                    }`}
                     value={formData.specialty}
-                    onChange={(e) =>
+                    onChange={(e) => {
                       setFormData({
                         ...formData,
                         specialty: e.target.value,
-                      })
-                    }
+                      });
+                      setErrors({
+                        ...errors,
+                        specialty: "",
+                      });
+                    }}
                   >
                     <option>Clinic Specialty...</option>
                     <option>General Consultation</option>
                     <option>Cardiology</option>
                     <option>Neurology</option>
                   </select>
+                  {errors.specialty && (
+                    <small className="text-danger">{errors.specialty}</small>
+                  )}
                 </div>
               </div>
             </div>
@@ -325,18 +572,25 @@ export default function AddClinic() {
                         <td>
                           <input
                             type="time"
-                            className="form-control"
+                            className={`form-control ${
+                              errors[`${day}-open`] ? "is-invalid" : ""
+                            }`}
                             value={workingHours[day].open}
                             disabled={workingHours[day].status === "Closed"}
-                            onChange={(e) =>
+                            onChange={(e) => {
                               setWorkingHours({
                                 ...workingHours,
                                 [day]: {
                                   ...workingHours[day],
                                   open: e.target.value,
                                 },
-                              })
-                            }
+                              });
+                              errors[`${day}-open`] && (
+                                <small className="text-danger">
+                                  {errors[`${day}-open`]}
+                                </small>
+                              );
+                            }}
                           />
                         </td>
 
@@ -344,18 +598,25 @@ export default function AddClinic() {
                         <td>
                           <input
                             type="time"
-                            className="form-control"
+                            className={`form-control ${
+                              errors[`${day}-close`] ? "is-invalid" : ""
+                            }`}
                             value={workingHours[day].close}
                             disabled={workingHours[day].status === "Closed"}
-                            onChange={(e) =>
+                            onChange={(e) => {
                               setWorkingHours({
                                 ...workingHours,
                                 [day]: {
                                   ...workingHours[day],
                                   close: e.target.value,
                                 },
-                              })
-                            }
+                              });
+                              errors[`${day}-close`] && (
+                                <small className="text-danger">
+                                  {errors[`${day}-close`]}
+                                </small>
+                              );
+                            }}
                           />
                         </td>
                       </tr>
@@ -391,24 +652,11 @@ export default function AddClinic() {
 
             <button
               className="btn btn-primary px-4"
-              onClick={() => {
-                Swal.fire({
-                  toast: true,
-                  position: "top",
-                  icon: "success",
-                  title: clinic
-                    ? "Update Clinic Successfully"
-                    : "Add Clinic Successfully",
-                  showConfirmButton: false,
-                  timer: 2000,
-                }).then(() => {
-                  navigate("/manage-clinics");
-                });
-              }}
+              onClick={() => handleSaveClinic()}
             >
-              <i class="fa-regular fa-pen-to-square"></i>
+              <i className="fa-regular fa-pen-to-square"></i>
               <FaSave className="me-2" />
-              {clinic ? "Update Clinic" : "Save Clinic"}
+              {id ? "Update Clinic" : "Save Clinic"}
             </button>
           </div>
         </div>
