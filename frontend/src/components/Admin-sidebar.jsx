@@ -40,7 +40,7 @@ export default function AdminSidebar() {
               to="/manage-clinics"
               className={({ isActive }) =>
                 location.pathname.startsWith("/manage-clinics") ||
-                location.pathname === "/add-clinic"
+                location.pathname.startsWith("/add-clinic")
                   ? "nav-link active rounded"
                   : "nav-link text-dark"
               }
