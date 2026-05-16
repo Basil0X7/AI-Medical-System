@@ -1,8 +1,10 @@
+
 const model = require("./models");
 const express = require("express");
 const cors = require("cors");
 const app = express();
 const PORT = 5001;
+
 
 app.use(
   cors({
@@ -12,6 +14,9 @@ app.use(
 );
 
 app.use(express.json());
+
+const doctorRoutes = require("./routes/doctorRoutes");
+app.use("/doctors", doctorRoutes);
 
 const adminClinicRoutes = require("./routes/adminClinicRoutes");
 app.use("/api/manage-clinics", adminClinicRoutes);
@@ -29,3 +34,4 @@ model.sequelize
   .catch((err) => {
     console.error("Error syncing database:", err);
   });
+

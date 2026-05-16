@@ -1,8 +1,10 @@
 {
   "development": {
-    "username": "root",
+    "username": "root",  
+
     "password": "reelove!@#123",
     "database": "AI Medical System",
+
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
@@ -15,8 +17,9 @@
   },
   "production": {
     "username": "root",
+
     "password": "reelove!@#123",
-    "database": "AI Medical System",
+
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

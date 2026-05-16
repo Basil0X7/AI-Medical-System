@@ -102,7 +102,7 @@ export default function EditDoctor() {
     });
 
     setTimeout(() => {
-      navigate("/manage-doctors");
+       navigate("/manage-doctors");
     }, 800);
   };
 

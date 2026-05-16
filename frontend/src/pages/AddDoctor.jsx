@@ -14,7 +14,7 @@ export default function AddDoctor() {
     license: "",
     specialty: "",
     clinic: "",
-    status: "Active",
+     status: "Active",
   });
 
   const [workingHours, setWorkingHours] = useState([
