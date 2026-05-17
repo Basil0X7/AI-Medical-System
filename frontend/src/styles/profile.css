@@ -1,167 +1,90 @@
-
-/* ======================
-   GLOBAL APP
-.app {
-  display: flex;
+.profile-page {
   min-height: 100vh;
-  font-family: "Manrope", sans-serif;
-  background: #f5f7fb;
-  transition: 0.3s;
+  background: #f6f7fb;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  color: #0f172a;
 }
 
-/* ======================
-   SIDEBAR
-.sidebar {
-  width: 260px;
-  background: #ffffff;
-  border-right: 1px solid #e6e6e6;
-  padding: 20px;
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: 800;
-  color: #003c90;
-  margin-bottom: 30px;
-}
-
-.sidebar nav a {
-  display: block;
-  padding: 10px;
-  margin-bottom: 8px;
-  text-decoration: none;
-  color: #444;
-  border-radius: 8px;
-  transition: 0.2s;
-}
-
-.sidebar nav a:hover {
-  background: #eee;
-}
-
-.sidebar nav a.active {
-  background: #003c90;
+.profile-header {
+  background: linear-gradient(120deg, #1e3a8a, #2563eb);
   color: white;
-}
-
-/* ======================
-   MAIN
-.main {
-  flex: 1;
-  padding: 20px;
-}
-
-/* ======================
-   TOPBAR
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
-  padding: 15px 20px;
-  border-radius: 12px;
-  border: 1px solid #eee;
-}
-
-.mode-btn {
-  padding: 8px 12px;
-  border: none;
-  background: #003c90;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* ======================
-   PROFILE CARD
-.profile-card {
-  margin-top: 20px;
-  background: white;
-  padding: 25px;
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  border-radius: 12px;
-  border: 1px solid #eee;
-}
-
-.profile-card img {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #003c90;
-}
-
-.info h2 {
-  margin: 0;
-}
-
-.title {
-  color: gray;
-  margin-bottom: 10px;
-}
-
-.info button {
-  margin-top: 10px;
-  padding: 8px 14px;
-  border: none;
-  background: #003c90;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* ======================
-   STATS
-.stats {
-  display: flex;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.card {
-  flex: 1;
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
   text-align: center;
-  border: 1px solid #eee;
+  padding: 70px 20px 60px;
 }
 
-.card h3 {
-  margin: 0;
-  font-size: 22px;
-  color: #003c90;
+.profile-header h1 {
+  font-size: 42px;
+  font-weight: 900;
+  margin-bottom: 14px;
 }
 
-/* ======================
-   DARK MODE
-.dark {
-  background: #121212;
+.profile-container {
+  max-width: 720px;
+  margin: -35px auto 60px;
+  padding: 0 25px;
+}
+
+.profile-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 35px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+}
+
+.profile-avatar {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #7dd3fc);
   color: white;
+  margin: 0 auto 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 900;
 }
 
-.dark .sidebar {
-  background: #1e1e1e;
-  border-color: #333;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
 }
 
-.dark .sidebar nav a {
-  color: #ddd;
+.form-group label {
+  font-weight: 800;
+  margin-bottom: 9px;
 }
 
-.dark .sidebar nav a:hover {
-  background: #2a2a2a;
+.form-group input,
+.form-group textarea {
+  border: 1px solid #cbd5e1;
+  border-radius: 11px;
+  padding: 14px 15px;
+  font-size: 15px;
+  outline: none;
 }
 
-.dark .topbar,
-.dark .profile-card,
-.dark .card {
-  background: #1e1e1e;
-  border-color: #333;
+.form-group textarea {
+  min-height: 110px;
+  resize: none;
 }
 
-.dark .mode-btn {
-  background: #555;
+.save-profile-btn {
+  width: 100%;
+  height: 52px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: white;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.confirmation-message {
+  margin-top: 16px;
+  text-align: center;
+  color: #64748b;
 }

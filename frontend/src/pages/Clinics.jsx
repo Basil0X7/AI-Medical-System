@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import "../styles/clinics.css";
 import Navbar from "../components/Navbar";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 import {
   FaTooth,
@@ -13,68 +15,36 @@ import {
 } from "react-icons/fa";
 
 function Clinics() {
-  const clinics = [
-    {
-      id: 1,
-      icon: <FaTooth />,
-      name: "Dental Clinic",
-      specialty: "Dentistry",
-      location: "First Floor - Room 101",
-      description:
-        "Specialized oral health care including preventative, restorative, and cosmetic dentistry.",
-      color: "blue",
-    },
-    {
-      id: 2,
-      icon: <FaHeartbeat />,
-      name: "Cardiology",
-      specialty: "Heart Care",
-      location: "Second Floor - Room 205",
-      description:
-        "Diagnosis and treatment for heart conditions and vascular diseases.",
-      color: "red",
-    },
-    {
-      id: 3,
-      icon: <FaBone />,
-      name: "Orthopedics",
-      specialty: "Bone & Joints",
-      location: "Ground Floor - Room 008",
-      description:
-        "Care for musculoskeletal injuries, bone health, and degenerative conditions.",
-      color: "green",
-    },
-    {
-      id: 4,
-      icon: <FaBrain />,
-      name: "Neurology",
-      specialty: "Brain & Nerves",
-      location: "Third Floor - Room 302",
-      description:
-        "Neurological evaluation and management of brain, spine, and nerve disorders.",
-      color: "purple",
-    },
-    {
-      id: 5,
-      icon: <FaHandHoldingMedical />,
-      name: "Dermatology",
-      specialty: "Skin Care",
-      location: "First Floor - Room 112",
-      description:
-        "Care for skin health, acne treatments, screenings, and dermatological procedures.",
-      color: "orange",
-    },
-    {
-      id: 6,
-      icon: <FaBaby />,
-      name: "Pediatrics",
-      specialty: "Children Health",
-      location: "Second Floor - Room 215",
-      description:
-        "Healthcare for infants, children, and adolescents focused on healthy development.",
-      color: "cyan",
-    },
-  ];
+  const [clinics, setClinics] = useState([]);
+  const [search, setSearch] = useState("");
+
+  const icons = {
+    blue: <FaTooth />,
+    red: <FaHeartbeat />,
+    green: <FaBone />,
+    purple: <FaBrain />,
+    orange: <FaHandHoldingMedical />,
+    cyan: <FaBaby />,
+  };
+
+  const getClinics = async () => {
+    try {
+      const res = await axios.get("http://localhost:5001/api/clinics");
+      setClinics(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getClinics();
+  }, []);
+
+  const filteredClinics = clinics.filter(
+    (clinic) =>
+      clinic.name.toLowerCase().includes(search.toLowerCase()) ||
+      clinic.specialty.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="clinics-page">
@@ -91,36 +61,41 @@ function Clinics() {
         <input
           type="text"
           placeholder="Search by clinic name or specialty..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </section>
 
       <section className="clinics-container">
-        {clinics.map((clinic) => (
-          <div className="clinic-box" key={clinic.id}>
-            <div className="clinic-top">
-              <div className={`clinic-emoji ${clinic.color}`}>
-                {clinic.icon}
+        {filteredClinics.length === 0 ? (
+          <h2>No clinic found</h2>
+        ) : (
+          filteredClinics.map((clinic) => (
+            <div className="clinic-box" key={clinic.clinicId}>
+              <div className="clinic-top">
+                <div className={`clinic-emoji ${clinic.color}`}>
+                  {icons[clinic.color]}
+                </div>
+
+                <div>
+                  <h3>{clinic.name}</h3>
+                  <p>{clinic.specialty}</p>
+                </div>
               </div>
 
-              <div>
-                <h3>{clinic.name}</h3>
+              <p className="clinic-description">{clinic.description}</p>
 
-                <p>{clinic.specialty}</p>
+              <div className="clinic-location">
+                <FaMapMarkerAlt />
+                {clinic.location}
               </div>
+
+              <Link to="/book-appointment" className="book-link">
+                Book Appointment
+              </Link>
             </div>
-
-            <p className="clinic-description">{clinic.description}</p>
-
-            <div className="clinic-location">
-              <FaMapMarkerAlt />
-              {clinic.location}
-            </div>
-
-            <Link to="/book-appointment" className="book-link">
-              Book Appointment
-            </Link>
-          </div>
-        ))}
+          ))
+        )}
       </section>
     </div>
   );

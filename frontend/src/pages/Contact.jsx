@@ -1,5 +1,7 @@
 import Navbar from "../components/Navbar";
 import "../styles/contact.css";
+import { useState } from "react";
+import axios from "axios";
 
 import {
   FaMapMarkerAlt,
@@ -9,6 +11,38 @@ import {
 } from "react-icons/fa";
 
 function Contact() {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post("http://localhost:5001/api/contact/create", formData);
+
+      alert("Message sent successfully");
+
+      setFormData({
+        fullName: "",
+        email: "",
+        message: "",
+      });
+    } catch (error) {
+      console.log(error);
+      alert("Failed to send message");
+    }
+  };
+
   return (
     <div className="contact-page">
       <Navbar />
@@ -27,55 +61,63 @@ function Contact() {
           <h2>Get In Touch</h2>
 
           <div className="info-box">
-            <span>
-              <FaMapMarkerAlt />
-            </span>
-
+            <span><FaMapMarkerAlt /></span>
             <p>Nablus, Palestine</p>
           </div>
 
           <div className="info-box">
-            <span>
-              <FaPhoneAlt />
-            </span>
-
+            <span><FaPhoneAlt /></span>
             <p>+970 599 123 456</p>
           </div>
 
           <div className="info-box">
-            <span>
-              <FaEnvelope />
-            </span>
-
+            <span><FaEnvelope /></span>
             <p>support@aimedical.com</p>
           </div>
 
           <div className="info-box">
-            <span>
-              <FaClock />
-            </span>
-
+            <span><FaClock /></span>
             <p>Open 24/7</p>
           </div>
         </div>
 
-        <form className="contact-form">
+        <form className="contact-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Full Name</label>
 
-            <input type="text" placeholder="Enter your name" />
+            <input
+              type="text"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              placeholder="Enter your name"
+              required
+            />
           </div>
 
           <div className="form-group">
             <label>Email Address</label>
 
-            <input type="email" placeholder="Enter your email" />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              required
+            />
           </div>
 
           <div className="form-group">
             <label>Message</label>
 
-            <textarea placeholder="Write your message..."></textarea>
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Write your message..."
+              required
+            ></textarea>
           </div>
 
           <button type="submit">Send Message</button>
